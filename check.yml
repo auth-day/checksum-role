@@ -1,0 +1,29 @@
+---
+- hosts: build
+  become: yes
+  roles:
+    - role: build-server
+
+
+- hosts: test
+  become: yes
+  roles: 
+    - role: test-server
+
+- hosts: all
+  
+  tasks:
+
+    - name: build_server != test_server 
+      debug: 
+        msg: "FALSE"
+      failed_when: "hostvars['build_server'].build_server | to_json != hostvars['test_server'].test_server | to_json "
+
+
+
+
+
+
+
+
+

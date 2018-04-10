@@ -1,0 +1,8 @@
+- name: hash of file
+  stat:
+    path: "{{ build_server_path_to_file }}"
+  register: build_server
+
+- set_fact: build_server="{{ build_server.stat.checksum }}"
+
+
